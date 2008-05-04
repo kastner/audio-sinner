@@ -22,6 +22,85 @@ a:link { color: #468966; }
 a:hover { color: #204530; }
 a:visited { color: #204530; }
 
+h1 { 
+  font-size: 200%; 
+  font-weight: bold; 
+  margin-bottom: 1em;
+}
+
+h2 { 
+  font-size: 130%; 
+  font-weight: bold; 
+  margin-bottom: 1em;
+}
+
 #page {
-  
+  background: #fff0a5;
+  font-size: 75%;
+  width: 50em;
+  margin: 0 auto;
+  text-align: left;  
+}
+
+#header {
+  text-align: center;
+}
+
+#header {
+  height: 7.333em;
+  background: url('../images/header-bar.png') repeat center;
+}
+
+#header a {
+  background: #fff0a5 url('/images/header-background.png') repeat-x;
+  height: 5.333em;
+  display: block;
+  position: relative;
+  padding-bottom: 0.9em;
+  top: 0.3em;
+}
+
+#header img {
+  height: 3.25em;
+  margin-top: 1.5em;
+}
+
+#content {
+  margin: 2em 0;
+  padding: 0 3em;
+}
+
+#footer {
+  font-size: 83.333%;
+  text-align: center;
+  padding: 0.5em;
+}
+
+/* common styles */
+a.mp3 {
+  padding: 0.5em 0 1em 1.5em;
+  margin-bottom: 2em;
+  background: url('../images/mp3.gif') no-repeat;
+  vertical-align: middle;
+}
+
+/* ## page styles ## */
+/* Home page */
+
+#home h1 {
+  float: left;
+}
+
+#home #search {
+  float: right;
+  margin-top: 0.3em;
+}
+
+#home #results {
+  clear: both;
+}
+
+ul#file-list {
+  clear: both;
+  line-height: 3em;
 }

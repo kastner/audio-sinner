@@ -3,15 +3,22 @@
 <html>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta name = "viewport" content = "width = 600">
   <title><%= (@title) ? @title : "MP3s" %></title>
-  <link rel="stylesheet" href="/stylesheet/reset.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="/stylesheets/reset.css" type="text/css" charset="utf-8" />
   <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" charset="utf-8" />
+  <script src="/javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/app.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
-  <div id="header"><h3><a href="/">Mini Blogin’</a></h3></div>
+<body id="<%= @body_id %>">
   <div id="page">
-    <%= yield %>
+    <div id="header">
+      <a href="/" alt="Audio Sinner"><img src="/images/audio-sinner.png" /></a>
+    </div>
+    <div id="content">
+      <%= yield %>
+    </div>
+    <div id="footer">&copy; Erik <a href="http://metaatem.net/" alt="kastner">Kastner</a>.</div>
   </div>
-  <div id="footer">&copy; Erik <a href="http://metaatem.net/" alt="kastner">Kastner</a>.</div>
 </body>
 </html>

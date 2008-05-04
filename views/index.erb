@@ -1,0 +1,14 @@
+<h1>Welcome to Audio Sinner</h1>
+<%= erb :search, :layout => false %>
+<div id="results" style="display: none">
+  <h2>Search results:</h2>
+  <ul>
+    <img src="/images/ajax-loader.gif" id="spinner" />
+  </ul>
+</div>
+<ul id="file-list">
+  <% @files.each do |file| %>
+    <li><a href="#" class="mp3"><%= File.basename(file, '.mp3') %></a></li>
+  
+  <% end %>
+</ul>
