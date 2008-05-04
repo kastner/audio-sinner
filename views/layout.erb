@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title><%= (@title) ? @title : "MP3s" %></title>
+  <link rel="stylesheet" href="/stylesheet/reset.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body>
+  <div id="header"><h3><a href="/">Mini Blogin’</a></h3></div>
+  <div id="page">
+    <%= yield %>
+  </div>
+  <div id="footer">&copy; Erik <a href="http://metaatem.net/" alt="kastner">Kastner</a>.</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+/*
+Colors:
+  yellow: ffb03b
+  green: 468966
+  lightO: b64926
+  darkO: 8e2800
+  cream: fff0a5
+*/
+
+body {
+  font-family: Verdana, Arial, sans-serif;
+	font-size: medium;
+	text-align: center;
+	color: #8e2800;
+	line-height: 1.3em;
+	background: black;
+	margin: 0;
+}
+
+a { text-decoration: underline; }
+a:link { color: #468966; }
+a:hover { color: #204530; }
+a:visited { color: #204530; }
+
+#page {
+  
+}
