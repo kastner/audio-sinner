@@ -84,6 +84,14 @@ a.mp3 {
   vertical-align: middle;
 }
 
+#notice {
+  border-top: 2px solid #8e2800;
+  border-bottom: 2px solid #8e2800;
+  background: #ffb03b;
+  padding: 0.5em 1em;
+  margin: 1em 1em;
+  clear: both;
+}
 /* ## page styles ## */
 /* Home page */
 

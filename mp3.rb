@@ -8,65 +8,56 @@ require 'open-uri'
 
 require 'ruby-debug'
 
-# set utf-8 for outgoing
+include AWS::S3
+
 before do
+  # always send utf-8
   header "Content-Type" => "text/html; charset=utf-8"
+  
+  # set css body id
   @body_id = "home"
+  
+  # set up a cache object
   CACHE = MemCache.new 'localhost:11211', :namespace => 'my_namespace' unless Object.const_defined?("CACHE")
+  
+  # the bucket to upload to
+  BUCKET = "mp3s.metaatem.net" unless Object.const_defined?("BUCKET")
+  
+  # set up s3
+  AWS::S3::Base.establish_connection!(
+    :access_key_id => ENV["AMAZON_ACCESS_KEY_ID"],
+    :secret_access_key => ENV["AMAZON_SECRET_ACCESS_KEY"]
+  )
 end
 
 get "/" do
-  @files = ["James - Laid.mp3", "The Bad Plus - Iron Man.mp3"]
-  @files = []
+  @files = Bucket.find(BUCKET).objects.collect do |object|
+    "<a href='http://#{BUCKET}/#{object.key.to_s}'>#{URI.unescape(object.metadata[:name].to_s)}</a>" 
+  end.join("<br/>")
   
   erb :index
 end
 
 get "/fetch" do
+  name = params[:key]
   url = CACHE[params[:key]]
+
+  if S3Object.exists? name, BUCKET
+    redirect "http://#{BUCKET}/#{name}"
+    halt
+  end
   
-  # set headers
   remote_header = %x{curl -s -u #{ENV["EZNEWS_USER"]}:#{ENV["EZNEWS_PASS"]} --head "#{url}"}
-  %w|Last-Modified ETag Accept-Ranges Content-Length Content-Type|.each do |h|
-    header h => remote_header[/#{h}: ([^\n]*)/, 1]
-  end
-
-  if @request.env.has_key?("HTTP_RANGE")
-    bytes = @request.env["HTTP_RANGE"].gsub(/bytes=/,'')
-    from, to = bytes.split(/-/)
-    puts "from is #{from} and to is #{to}"
-    puts "bytes = #{bytes}"
-    header "Content-Range" => "bytes #{bytes}/#{header["Content-Length"]}"
-    header "Content-Length" => (to.to_i - from.to_i + 1).to_s
-    header "Connection" => "keep-alive"
-    status 206
-    out = %x{curl -s -r#{bytes} --raw -u #{ENV["EZNEWS_USER"]}:#{ENV["EZNEWS_PASS"]} "#{url}"}
-  elsif @request.env["REQUEST_METHOD"] == "HEAD"
-    out = ""
-  else
-    out = %x{curl -s -u #{ENV["EZNEWS_USER"]}:#{ENV["EZNEWS_PASS"]} "#{url}"}
-  end
-
-  out
-end
-
-get "/fetch2" do
-  # debugger
-  if @request.env.has_key?("HTTP_RANGE")
-    puts "They want range! #{@request.env["HTTP_RANGE"]}"
+    
+  Thread.new do
+    puts "In thread"
+    bits = open(CACHE[params[:key]], :http_basic_authentication => [ENV["EZNEWS_USER"], ENV["EZNEWS_PASS"]])
+    
+    item = S3Object.store(name, bits, BUCKET, :access => :public_read, :content_type => remote_header[/Content-Type: ([^\n]*)/, 1], "x-amz-meta-name" => File.basename(url))
+    puts "uploaded!"
   end
   
-  if @request.env["HTTP_USER_AGENT"] =~ /iphone/i
-    if @request.env.has_key?("HTTP_RANGE")
-    else
-    end
-  else
-    open(CACHE[params[:key]], 
-      :http_basic_authentication => [ENV["EZNEWS_USER"], ENV["EZNEWS_PASS"]],     
-      :content_length_proc => lambda {|c| header "Content-Type" => "audio/mp3", "Content-Length" => c.to_s; puts "content length is #{c}"},
-      :progress_proc => lambda {|size| }
-    )
-  end
+  redirect "/?send=true"
 end
 
 get "/search" do
