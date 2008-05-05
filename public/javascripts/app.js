@@ -16,8 +16,6 @@ $(function() {
     }, 10000);
   }
   if (location.hash) {
-/*    $(location.hash).addClass("highlight");//.animate("font-size", "200%");*/
-/*    alert($(location.hash).length);*/
     $(location.hash).animate({fontSize: "150%"}, 1500);
   }
 });

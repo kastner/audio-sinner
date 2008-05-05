@@ -43,7 +43,7 @@ end
 
 get "/check" do
   key = params[:key]
-  CACHE["download-#{key}"] ||= 0
+  CACHE["download-#{key}"] ||= "0"
 end
 
 get "/fetch" do
