@@ -31,7 +31,7 @@ h1 {
 h2 { 
   font-size: 130%; 
   font-weight: bold; 
-  margin-bottom: 1em;
+  margin-bottom: 0em;
 }
 
 #page {
@@ -78,8 +78,7 @@ h2 {
 
 /* common styles */
 a.mp3 {
-  padding: 0.5em 0 1em 1.5em;
-  margin-bottom: 2em;
+  padding-left: 1.3em;
   background: url('../images/mp3.gif') no-repeat;
   vertical-align: middle;
 }
@@ -91,6 +90,10 @@ a.mp3 {
   padding: 0.5em 1em;
   margin: 1em 1em;
   clear: both;
+}
+
+.highlight {
+  background-color: #ffb03b;
 }
 /* ## page styles ## */
 /* Home page */
@@ -106,6 +109,7 @@ a.mp3 {
 
 #home #results {
   clear: both;
+  line-height: 2em;
 }
 
 ul#file-list {

@@ -2,9 +2,10 @@
 <%= erb :search, :layout => false %>
 
 <% if params[:send] %>
-<div id="notice">Your file is being uploaded now. It might take up to 10 minutes. <a href="/">Click to refresh this page.</a></div>
+<div id="notice" class="<%= params[:key] %>">Your file is being transfered now. This page will refresh when it's all done</div>
 <% end %>
 
 <div id="results">
+  <h2>Here's what's available without searching:</h2>
   <%= @files %>
 </div>
