@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'sinatra/lib/sinatra.rb'
-require "/var/www/awskeys.rb"
+require 'awskeys'
 
 set :run, false
 # set :env, :production
