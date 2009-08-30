@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'sinatra/lib/sinatra.rb'
+require "../awskeys.rb"
 
-Sinatra::Application.default_options.merge!(:run => false, :env => :production)
+set :run, false
+# set :env, :production
+
 require 'mp3.rb'
-
 run Sinatra::Application

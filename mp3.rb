@@ -6,13 +6,13 @@ require 'memcache'
 require 'sha1'
 require 'open-uri'
 
-require 'ruby-debug'
+# require 'ruby-debug'
 
 include AWS::S3
 
 before do
   # always send utf-8
-  header "Content-Type" => "text/html; charset=utf-8"
+  headers "Content-Type" => "text/html; charset=utf-8"
   
   # set css body id
   @body_id = "home"
